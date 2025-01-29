@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "3.617.0",
-    "@prisma/client": "^6.2.1",
+    "@prisma/client": "6.2.1",
     "@radix-ui/react-dialog": "^1.1.4",
     "@radix-ui/react-label": "^2.1.1",
     "@radix-ui/react-radio-group": "^1.2.2",
@@ -43,11 +43,6 @@
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.2"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "bcrypt"
-    ]
   },
   "packageManager": "pnpm@10.0.0+sha512.b8fef5494bd3fe4cbd4edabd0745df2ee5be3e4b0b8b08fa643aa3e4c6702ccc0f00d68fa8a8c9858a735a0032485a44990ed2810526c875e416f001b17df12b"
 }

@@ -3,6 +3,7 @@
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import bcrypt from "bcrypt";
+import { transport } from "@/lib/ses";
 
 export async function createUser(payload: {
   firstName: string;
@@ -12,16 +13,17 @@ export async function createUser(payload: {
   referral?: string;
 }) {
   try {
-    const agent = await prisma.agent.findUnique({
-      where: {
-        email: payload?.referral,
-      },
-    });
+    const getAgentId = async () => {
+      const agent = await prisma.agent.findUnique({
+        where: {
+          email: payload?.referral,
+        },
+      });
 
-    if (!agent) {
-      return { error: "Agent not found" };
-    }
+      return agent?.agentId ?? "0088fb14-7265-465c-bf57-112fe1309bdd";
+    };
 
+    const agentId = await getAgentId();
     const hashedPassword = await bcrypt.hash(payload?.password, 10);
 
     const user = await prisma.student.create({
@@ -30,7 +32,7 @@ export async function createUser(payload: {
         lastName: payload?.lastName,
         email: payload?.email,
         password: hashedPassword,
-        agentId: agent?.agentId,
+        agentId: agentId,
       },
     });
 
@@ -67,5 +69,42 @@ export async function loginUser(payload: { email: string; password: string }) {
   } catch (error) {
     console.error(error);
     return { error: "Failed to login" };
+  }
+}
+
+export async function verifyEmail(payload: { email: string }) {
+  console.log(payload?.email);
+  try {
+    const user = await prisma.student.update({
+      where: {
+        email: payload?.email,
+      },
+      data: {
+        emailverified: true,
+      },
+    });
+
+    revalidatePath("/");
+
+    return { user };
+  } catch (error) {
+    console.error(error);
+    return { error: "Failed to verify email" };
+  }
+}
+
+export async function sendOTP(email: string, otp: string) {
+  try {
+    const response = await transport.sendMail({
+      from: process.env.AWS_SES_SMTP_EMAIL,
+      to: email,
+      subject: "Sendezy OTP",
+      text: `Your OTP is ${otp}`,
+    });
+
+    return response;
+  } catch (error) {
+    console.error(error);
+    return { error: "Failed to send OTP" };
   }
 }

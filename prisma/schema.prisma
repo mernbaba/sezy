@@ -32,27 +32,33 @@ model Agent {
 }
 
 model Student {
-  studentId       String        @id @default(uuid())
-  firstName       String
-  middleName      String?
-  lastName        String
-  email           String        @unique
-  password        String
-  phone           String?
-  status          Boolean       @default(true)
-  image           String?
-  dob             DateTime?
-  gender          String?
-  country         String?
-  postalAddress   String?
-  physicalAddress String?
-  nationalId      String?
-  agentId         String?
-  emailverified   Boolean       @default(false)
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-  Agent           Agent?        @relation(fields: [agentId], references: [agentId])
-  Transaction     Transaction[]
+  studentId         String        @id @default(uuid())
+  firstName         String
+  middleName        String?
+  lastName          String
+  email             String        @unique
+  password          String
+  phone             String?
+  status            Boolean       @default(true)
+  image             String?
+  passportNumber    String?
+  passportFrontSide String?
+  passportBackSide  String?
+  loanDoc           String?
+  admissionDoc      String?
+  dob               DateTime?
+  gender            String?
+  address           String?
+  city              String?
+  state             String?
+  country           String?
+  pincode           String?
+  agentId           String?
+  emailverified     Boolean       @default(false)
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+  Agent             Agent?        @relation(fields: [agentId], references: [agentId])
+  Transaction       Transaction[]
 }
 
 model Currency {
@@ -78,34 +84,50 @@ model Fee {
 }
 
 model Transaction {
-  transactionId String            @id @default(uuid())
-  studentId     String
-  agentId       String?
-  currencyId    String
-  amount        Float
-  forexRate     Float
-  status        TransactionStatus @default(Incomplete)
-  RRN           String?
-  challan       String?
-  a2Form        String?
-  swiftCopy     String?
-  remarks       String?
-  createdAt     DateTime          @default(now())
-  updatedAt     DateTime          @updatedAt
-  Student       Student           @relation(fields: [studentId], references: [studentId])
-  Agent         Agent?            @relation(fields: [agentId], references: [agentId])
-  Currency      Currency          @relation(fields: [currencyId], references: [currencyId])
+  transactionId       String            @id @default(uuid())
+  studentId           String
+  agentId             String?
+  currencyId          String
+  amount              Float
+  forexRate           Float
+  status              TransactionStatus @default(Incomplete)
+  RRN                 String?
+  challan             String?
+  a2Form              String?
+  swiftCopy           String?
+  remitType           String?
+  program             String?
+  yearOfCompletion    String?
+  paymentType         String?
+  university          String?
+  universitystudentId String?
+  universityAddress   String?
+  universityCity      String?
+  universityCountry   String?
+  document1           String?
+  document2           String?
+  additionalDocument  String?
+  accountInfo         String?
+  bankName            String?
+  bankAccountNumber   String?
+  bankCode            String?
+  bankCodeType        String?
+  bankSwiftCode       String?
+  bankIBAN            String?
+  bankAddress         String?
+  bankCountry         String?
+  remarks             String?
+  createdAt           DateTime          @default(now())
+  updatedAt           DateTime          @updatedAt
+  Student             Student           @relation(fields: [studentId], references: [studentId])
+  Agent               Agent?            @relation(fields: [agentId], references: [agentId])
+  Currency            Currency          @relation(fields: [currencyId], references: [currencyId])
 }
 
 enum TransactionStatus {
-  Successful
-  Funds_Received
-  Funds_Awaited
   Incomplete
+  Initiated
+  Successful
   Cancelled
-  Expired
-  Failed_by_Bank
-  Failed_by_Sendezy
-  Refund_Initiated
-  Refunded
+  Failed
 }

@@ -4,10 +4,9 @@ build:
   commands:
     pre-build:
       - npm install
-    build:
-      - npm install
-    post-build:
       - npx prisma generate
+    build:
+      - npm run build
 
 run:
   runtime-version: 18.19.0

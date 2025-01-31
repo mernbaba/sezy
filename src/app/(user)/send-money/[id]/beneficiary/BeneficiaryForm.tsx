@@ -187,6 +187,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                     onValueChange={(value) =>
                       updateTransactionFields("program", value)
                     }
+                    required
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select Program" />
@@ -239,6 +240,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                     onValueChange={(value) =>
                       updateTransactionFields("paymentType", value)
                     }
+                    required
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select Payment Type" />
@@ -515,7 +517,6 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                         }
                       }
                     }}
-                    required
                   />
                 </>
               )}
@@ -543,27 +544,41 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                   </Button>
                 </div>
               ) : (
-                <Input
-                  type="file"
-                  name="document1"
-                  className="border-black border-2"
-                  onChange={async (e) => {
-                    if (e.target.files !== null && e.target.files.length > 0) {
-                      const { url, error } = await handleFileChange({
-                        file: e.target.files[0],
-                      });
+                <>
+                  <Button
+                    type="button"
+                    onClick={() =>
+                      document.getElementById("document1Input")?.click()
+                    }
+                  >
+                    Upload
+                  </Button>
+                  <Input
+                    type="file"
+                    id="document1Input"
+                    name="document1"
+                    className="hidden border-black border-2"
+                    onChange={async (e) => {
+                      if (
+                        e.target.files !== null &&
+                        e.target.files.length > 0
+                      ) {
+                        const { url, error } = await handleFileChange({
+                          file: e.target.files[0],
+                        });
 
-                      if (error) {
-                        alert("Error uploading file");
-                      } else {
-                        if (url) {
-                          updateTransactionFields("document1", url);
+                        if (error) {
+                          alert("Error uploading file");
+                        } else {
+                          if (url) {
+                            updateTransactionFields("document1", url);
+                          }
                         }
                       }
-                    }
-                  }}
-                  required
-                />
+                    }}
+                    required
+                  />
+                </>
               )}
             </CardContent>
           </Card>
@@ -585,27 +600,41 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                   </Button>
                 </div>
               ) : (
-                <Input
-                  type="file"
-                  name="document2"
-                  className="border-black border-2"
-                  onChange={async (e) => {
-                    if (e.target.files !== null && e.target.files.length > 0) {
-                      const { url, error } = await handleFileChange({
-                        file: e.target.files[0],
-                      });
+                <>
+                  <Button
+                    type="button"
+                    onClick={() =>
+                      document.getElementById("document2Input")?.click()
+                    }
+                  >
+                    Upload
+                  </Button>
+                  <Input
+                    type="file"
+                    id="document2Input"
+                    name="document2"
+                    className="hidden border-black border-2"
+                    onChange={async (e) => {
+                      if (
+                        e.target.files !== null &&
+                        e.target.files.length > 0
+                      ) {
+                        const { url, error } = await handleFileChange({
+                          file: e.target.files[0],
+                        });
 
-                      if (error) {
-                        alert("Error uploading file");
-                      } else {
-                        if (url) {
-                          updateTransactionFields("document2", url);
+                        if (error) {
+                          alert("Error uploading file");
+                        } else {
+                          if (url) {
+                            updateTransactionFields("document2", url);
+                          }
                         }
                       }
-                    }
-                  }}
-                  required
-                />
+                    }}
+                    required
+                  />
+                </>
               )}
             </CardContent>
           </Card>
@@ -630,27 +659,42 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                   </Button>
                 </div>
               ) : (
-                <Input
-                  type="file"
-                  name="additionalDocument"
-                  className="border-black border-2"
-                  onChange={async (e) => {
-                    if (e.target.files !== null && e.target.files.length > 0) {
-                      const { url, error } = await handleFileChange({
-                        file: e.target.files[0],
-                      });
+                <>
+                  <Button
+                    type="button"
+                    onClick={() =>
+                      document
+                        .getElementById("additionalDocumentInput")
+                        ?.click()
+                    }
+                  >
+                    Upload
+                  </Button>
+                  <Input
+                    type="file"
+                    id="additionalDocumentInput"
+                    name="additionalDocument"
+                    className="hidden border-black border-2"
+                    onChange={async (e) => {
+                      if (
+                        e.target.files !== null &&
+                        e.target.files.length > 0
+                      ) {
+                        const { url, error } = await handleFileChange({
+                          file: e.target.files[0],
+                        });
 
-                      if (error) {
-                        alert("Error uploading file");
-                      } else {
-                        if (url) {
-                          updateTransactionFields("additionalDocument", url);
+                        if (error) {
+                          alert("Error uploading file");
+                        } else {
+                          if (url) {
+                            updateTransactionFields("additionalDocument", url);
+                          }
                         }
                       }
-                    }
-                  }}
-                  required
-                />
+                    }}
+                  />
+                </>
               )}
             </CardContent>
           </Card>
@@ -676,27 +720,41 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                   </Button>
                 </div>
               ) : (
-                <Input
-                  type="file"
-                  name="document1"
-                  className="border-black border-2"
-                  onChange={async (e) => {
-                    if (e.target.files !== null && e.target.files.length > 0) {
-                      const { url, error } = await handleFileChange({
-                        file: e.target.files[0],
-                      });
+                <>
+                  <Button
+                    type="button"
+                    onClick={() =>
+                      document.getElementById("document1Input")?.click()
+                    }
+                  >
+                    Upload
+                  </Button>
+                  <Input
+                    type="file"
+                    id="document1Input"
+                    name="document1"
+                    className="hidden border-black border-2"
+                    onChange={async (e) => {
+                      if (
+                        e.target.files !== null &&
+                        e.target.files.length > 0
+                      ) {
+                        const { url, error } = await handleFileChange({
+                          file: e.target.files[0],
+                        });
 
-                      if (error) {
-                        alert("Error uploading file");
-                      } else {
-                        if (url) {
-                          updateTransactionFields("document1", url);
+                        if (error) {
+                          alert("Error uploading file");
+                        } else {
+                          if (url) {
+                            updateTransactionFields("document1", url);
+                          }
                         }
                       }
-                    }
-                  }}
-                  required
-                />
+                    }}
+                    required
+                  />
+                </>
               )}
             </CardContent>
           </Card>
@@ -721,27 +779,42 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                   </Button>
                 </div>
               ) : (
-                <Input
-                  type="file"
-                  name="additionalDocument"
-                  className="border-black border-2"
-                  onChange={async (e) => {
-                    if (e.target.files !== null && e.target.files.length > 0) {
-                      const { url, error } = await handleFileChange({
-                        file: e.target.files[0],
-                      });
+                <>
+                  <Button
+                    type="button"
+                    onClick={() =>
+                      document
+                        .getElementById("additionalDocumentInput")
+                        ?.click()
+                    }
+                  >
+                    Upload
+                  </Button>
+                  <Input
+                    type="file"
+                    id="additionalDocumentInput"
+                    name="additionalDocument"
+                    className="hidden border-black border-2"
+                    onChange={async (e) => {
+                      if (
+                        e.target.files !== null &&
+                        e.target.files.length > 0
+                      ) {
+                        const { url, error } = await handleFileChange({
+                          file: e.target.files[0],
+                        });
 
-                      if (error) {
-                        alert("Error uploading file");
-                      } else {
-                        if (url) {
-                          updateTransactionFields("additionalDocument", url);
+                        if (error) {
+                          alert("Error uploading file");
+                        } else {
+                          if (url) {
+                            updateTransactionFields("additionalDocument", url);
+                          }
                         }
                       }
-                    }
-                  }}
-                  required
-                />
+                    }}
+                  />
+                </>
               )}
             </CardContent>
           </Card>
@@ -767,27 +840,41 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                   </Button>
                 </div>
               ) : (
-                <Input
-                  type="file"
-                  name="document1"
-                  className="border-black border-2"
-                  onChange={async (e) => {
-                    if (e.target.files !== null && e.target.files.length > 0) {
-                      const { url, error } = await handleFileChange({
-                        file: e.target.files[0],
-                      });
+                <>
+                  <Button
+                    type="button"
+                    onClick={() =>
+                      document.getElementById("document1Input")?.click()
+                    }
+                  >
+                    Upload
+                  </Button>
+                  <Input
+                    type="file"
+                    id="document1Input"
+                    name="document1"
+                    className="hidden border-black border-2"
+                    onChange={async (e) => {
+                      if (
+                        e.target.files !== null &&
+                        e.target.files.length > 0
+                      ) {
+                        const { url, error } = await handleFileChange({
+                          file: e.target.files[0],
+                        });
 
-                      if (error) {
-                        alert("Error uploading file");
-                      } else {
-                        if (url) {
-                          updateTransactionFields("document1", url);
+                        if (error) {
+                          alert("Error uploading file");
+                        } else {
+                          if (url) {
+                            updateTransactionFields("document1", url);
+                          }
                         }
                       }
-                    }
-                  }}
-                  required
-                />
+                    }}
+                    required
+                  />
+                </>
               )}
             </CardContent>
           </Card>
@@ -812,27 +899,42 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                   </Button>
                 </div>
               ) : (
-                <Input
-                  type="file"
-                  name="additionalDocument"
-                  className="border-black border-2"
-                  onChange={async (e) => {
-                    if (e.target.files !== null && e.target.files.length > 0) {
-                      const { url, error } = await handleFileChange({
-                        file: e.target.files[0],
-                      });
+                <>
+                  <Button
+                    type="button"
+                    onClick={() =>
+                      document
+                        .getElementById("additionalDocumentInput")
+                        ?.click()
+                    }
+                  >
+                    Upload
+                  </Button>
+                  <Input
+                    type="file"
+                    id="additionalDocumentInput"
+                    name="additionalDocument"
+                    className="hidden border-black border-2"
+                    onChange={async (e) => {
+                      if (
+                        e.target.files !== null &&
+                        e.target.files.length > 0
+                      ) {
+                        const { url, error } = await handleFileChange({
+                          file: e.target.files[0],
+                        });
 
-                      if (error) {
-                        alert("Error uploading file");
-                      } else {
-                        if (url) {
-                          updateTransactionFields("additionalDocument", url);
+                        if (error) {
+                          alert("Error uploading file");
+                        } else {
+                          if (url) {
+                            updateTransactionFields("additionalDocument", url);
+                          }
                         }
                       }
-                    }
-                  }}
-                  required
-                />
+                    }}
+                  />
+                </>
               )}
             </CardContent>
           </Card>
@@ -858,27 +960,41 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                   </Button>
                 </div>
               ) : (
-                <Input
-                  type="file"
-                  name="document1"
-                  className="border-black border-2"
-                  onChange={async (e) => {
-                    if (e.target.files !== null && e.target.files.length > 0) {
-                      const { url, error } = await handleFileChange({
-                        file: e.target.files[0],
-                      });
+                <>
+                  <Button
+                    type="button"
+                    onClick={() =>
+                      document.getElementById("document1Input")?.click()
+                    }
+                  >
+                    Upload
+                  </Button>
+                  <Input
+                    type="file"
+                    id="document1Input"
+                    name="document1"
+                    className="hidden border-black border-2"
+                    onChange={async (e) => {
+                      if (
+                        e.target.files !== null &&
+                        e.target.files.length > 0
+                      ) {
+                        const { url, error } = await handleFileChange({
+                          file: e.target.files[0],
+                        });
 
-                      if (error) {
-                        alert("Error uploading file");
-                      } else {
-                        if (url) {
-                          updateTransactionFields("document1", url);
+                        if (error) {
+                          alert("Error uploading file");
+                        } else {
+                          if (url) {
+                            updateTransactionFields("document1", url);
+                          }
                         }
                       }
-                    }
-                  }}
-                  required
-                />
+                    }}
+                    required
+                  />
+                </>
               )}
             </CardContent>
           </Card>
@@ -903,27 +1019,42 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                   </Button>
                 </div>
               ) : (
-                <Input
-                  type="file"
-                  name="additionalDocument"
-                  className="border-black border-2"
-                  onChange={async (e) => {
-                    if (e.target.files !== null && e.target.files.length > 0) {
-                      const { url, error } = await handleFileChange({
-                        file: e.target.files[0],
-                      });
+                <>
+                  <Button
+                    type="button"
+                    onClick={() =>
+                      document
+                        .getElementById("additionalDocumentInput")
+                        ?.click()
+                    }
+                  >
+                    Upload
+                  </Button>
+                  <Input
+                    type="file"
+                    id="additionalDocumentInput"
+                    name="additionalDocument"
+                    className="hidden border-black border-2"
+                    onChange={async (e) => {
+                      if (
+                        e.target.files !== null &&
+                        e.target.files.length > 0
+                      ) {
+                        const { url, error } = await handleFileChange({
+                          file: e.target.files[0],
+                        });
 
-                      if (error) {
-                        alert("Error uploading file");
-                      } else {
-                        if (url) {
-                          updateTransactionFields("additionalDocument", url);
+                        if (error) {
+                          alert("Error uploading file");
+                        } else {
+                          if (url) {
+                            updateTransactionFields("additionalDocument", url);
+                          }
                         }
                       }
-                    }
-                  }}
-                  required
-                />
+                    }}
+                  />
+                </>
               )}
             </CardContent>
           </Card>

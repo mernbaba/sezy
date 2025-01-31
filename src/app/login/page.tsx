@@ -38,6 +38,7 @@ const Page = () => {
 
                   if (error) {
                     console.error("err: ", error);
+                    alert("Invalid credentials");
                     return;
                   } else {
                     setCookie("sezy", user, {

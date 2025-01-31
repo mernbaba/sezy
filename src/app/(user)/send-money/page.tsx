@@ -8,6 +8,9 @@ const Page = async () => {
         equals: true,
       },
     },
+    orderBy: {
+      createdAt: "asc",
+    },
   });
 
   return (

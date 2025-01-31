@@ -45,8 +45,10 @@ const SendMoneyForm = ({ currencies }: { currencies: Currency[] }) => {
         forexRate: forexRate,
       });
 
-      if (transaction)
+      if (transaction) {
+        alert("Transaction initiated");
         router.push(`/send-money/${transaction?.transactionId}/student`);
+      }
     } catch (error) {
       console.log(error);
       alert("An error happened while creating the transaction");

@@ -481,27 +481,43 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                   </Button>
                 </div>
               ) : (
-                <Input
-                  type="file"
-                  name="additionalDocument"
-                  className="border-black border-2"
-                  onChange={async (e) => {
-                    if (e.target.files !== null && e.target.files.length > 0) {
-                      const { url, error } = await handleFileChange({
-                        file: e.target.files[0],
-                      });
+                <>
+                  <Button
+                    type="button"
+                    onClick={() =>
+                      document
+                        .getElementById("additionalDocumentInput")
+                        ?.click()
+                    }
+                  >
+                    Upload
+                  </Button>
+                  <Input
+                    type="file"
+                    id="additionalDocumentInput"
+                    name="additionalDocument"
+                    className="hidden border-black border-2"
+                    onChange={async (e) => {
+                      if (
+                        e.target.files !== null &&
+                        e.target.files.length > 0
+                      ) {
+                        const { url, error } = await handleFileChange({
+                          file: e.target.files[0],
+                        });
 
-                      if (error) {
-                        alert("Error uploading file");
-                      } else {
-                        if (url) {
-                          updateTransactionFields("additionalDocument", url);
+                        if (error) {
+                          alert("Error uploading file");
+                        } else {
+                          if (url) {
+                            updateTransactionFields("additionalDocument", url);
+                          }
                         }
                       }
-                    }
-                  }}
-                  required
-                />
+                    }}
+                    required
+                  />
+                </>
               )}
             </CardContent>
           </Card>

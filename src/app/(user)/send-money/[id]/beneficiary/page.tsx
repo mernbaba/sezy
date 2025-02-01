@@ -13,7 +13,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl font-medium">Beneficiary Details</h1>
+      <h1 className="text-2xl font-medium">Step 3 - Beneficiary Details</h1>
 
       <h3 className="text-xl">Remit To</h3>
 

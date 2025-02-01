@@ -18,7 +18,7 @@ const Page = async () => {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-2xl">Step 1 - Student Details</h1>
+      <h1 className="text-2xl">Step 2 - Student Document Upload</h1>
 
       {student && <StudentForm student={student} />}
     </div>

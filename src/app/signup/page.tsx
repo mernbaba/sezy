@@ -8,13 +8,11 @@ import { Label } from "@/components/ui/label";
 import Image from "next/image";
 import Link from "next/link";
 import { setCookie } from "cookies-next";
-import { useRouter } from "next/navigation";
 import Verify from "../verify-email/verify";
 import { useState } from "react";
 import { Student } from "@prisma/client";
 
 const Page = () => {
-  const router = useRouter();
   const [step, setStep] = useState(1);
   const [user, setUser] = useState<Student>();
 

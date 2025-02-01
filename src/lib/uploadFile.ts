@@ -39,7 +39,7 @@ export const uploadFile = async ({
         `Error uploading file, with status: ${meta.httpStatusCode}`
       );
 
-    return `https://${process.env.NEXT_PUBLIC_AWS_BUCKET}.s3.${process.env.NEXT_PUBLIC_AWS_S3_REGION}.amazonaws.com/${key}`;
+    return `${process.env.NEXT_PUBLIC_CLOUDFRONT_DIST}/${key}`;
   } catch (err) {
     console.error(err);
   }

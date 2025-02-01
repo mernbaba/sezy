@@ -9,9 +9,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
+import Verify from "../verify-email/verify";
+import { useState } from "react";
+import { Student } from "@prisma/client";
 
 const Page = () => {
   const router = useRouter();
+  const [step, setStep] = useState(1);
+  const [user, setUser] = useState<Student>();
 
   interface Payload {
     firstName: string;
@@ -27,104 +32,110 @@ const Page = () => {
         <div className="flex flex-col gap-6">
           <Card className="overflow-hidden">
             <CardContent className="grid p-0 md:grid-cols-2">
-              <form
-                className="p-6 md:p-8"
-                action={async (e) => {
-                  const formData = Object.fromEntries(e.entries());
+              {step == 1 ? (
+                <form
+                  className="p-6 md:p-8"
+                  action={async (e) => {
+                    const formData = Object.fromEntries(e.entries());
 
-                  const payload: Payload = {
-                    firstName: formData["firstName"] as string,
-                    lastName: formData["lastName"] as string,
-                    email: formData["email"] as string,
-                    password: formData["password"] as string,
-                    referral: formData["referral"] as string,
-                  };
+                    const payload: Payload = {
+                      firstName: formData["firstName"] as string,
+                      lastName: formData["lastName"] as string,
+                      email: formData["email"] as string,
+                      password: formData["password"] as string,
+                      referral: formData["referral"] as string,
+                    };
 
-                  const { user, error } = await createUser(payload);
+                    const { user, error } = await createUser(payload);
+                    setUser(user);
+                    setStep(2);
 
-                  if (error) {
-                    console.error("err: ", error);
-                    return;
-                  } else {
-                    setCookie("sezy", user, {
-                      maxAge: 60 * 60 * 24 * 7,
-                    });
+                    if (error) {
+                      console.error("err: ", error);
+                      return;
+                    } else {
+                      setCookie("sezy", user, {
+                        maxAge: 60 * 60 * 24 * 7,
+                      });
 
-                    router.push("/send-money");
-                  }
-                }}
-              >
-                <div className="flex flex-col gap-6">
-                  <div className="flex flex-col items-center text-center">
-                    <h1 className="text-2xl font-bold">Create an account</h1>
-                    <p className="text-balance text-muted-foreground">
-                      Sign up for a new SendEzy account
-                    </p>
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="firstName">First Name</Label>
-                    <Input
-                      id="firstName"
-                      name="firstName"
-                      type="text"
-                      placeholder="Enter your first name"
-                      required
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="lastName">Last Name</Label>
-                    <Input
-                      id="lastName"
-                      name="lastName"
-                      type="text"
-                      placeholder="Enter your last name"
-                      required
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="Enter your email"
-                      required
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="password">Password</Label>
-                    <Input
-                      id="password"
-                      name="password"
-                      type="password"
-                      placeholder="Enter your password"
-                      required
-                    />
-                  </div>
-                  <div className="grid gap-2">
-                    <Label htmlFor="referral">Referral</Label>
-                    <Input
-                      id="referral"
-                      name="referral"
-                      type="email"
-                      placeholder="Enter referral code"
-                    />
-                  </div>
-                  <Button type="submit" className="w-full">
-                    Sign Up
-                  </Button>
+                      // router.push("/send-money");
+                    }
+                  }}
+                >
+                  <div className="flex flex-col gap-6">
+                    <div className="flex flex-col items-center text-center">
+                      <h1 className="text-2xl font-bold">Create an account</h1>
+                      <p className="text-balance text-muted-foreground">
+                        Sign up for a new SendEzy account
+                      </p>
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="firstName">First Name</Label>
+                      <Input
+                        id="firstName"
+                        name="firstName"
+                        type="text"
+                        placeholder="Enter your first name"
+                        required
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="lastName">Last Name</Label>
+                      <Input
+                        id="lastName"
+                        name="lastName"
+                        type="text"
+                        placeholder="Enter your last name"
+                        required
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="email">Email</Label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="Enter your email"
+                        required
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="password">Password</Label>
+                      <Input
+                        id="password"
+                        name="password"
+                        type="password"
+                        placeholder="Enter your password"
+                        required
+                      />
+                    </div>
+                    <div className="grid gap-2">
+                      <Label htmlFor="referral">Referral</Label>
+                      <Input
+                        id="referral"
+                        name="referral"
+                        type="email"
+                        placeholder="Enter referral code"
+                      />
+                    </div>
+                    <Button type="submit" className="w-full">
+                      Sign Up
+                    </Button>
 
-                  <div className="text-center text-sm">
-                    Already have an account?{" "}
-                    <Link
-                      href="/login"
-                      className="underline underline-offset-4"
-                    >
-                      Login
-                    </Link>
+                    <div className="text-center text-sm">
+                      Already have an account?{" "}
+                      <Link
+                        href="/login"
+                        className="underline underline-offset-4"
+                      >
+                        Login
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              </form>
+                </form>
+              ) : (
+                user && <Verify user={user} />
+              )}
               <div className="relative hidden bg-[#00285C] md:block">
                 <Image
                   src="/logo.jpg"

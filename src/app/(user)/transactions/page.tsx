@@ -5,6 +5,7 @@ import { Student } from "@prisma/client";
 import TransactionPage from "./TransactionPage";
 
 export const dynamicParams = true;
+export const revalidate = 0;
 
 const Page = async () => {
   const userCookie = await getCookie("sezy", { cookies });
@@ -20,6 +21,14 @@ const Page = async () => {
       Currency: true,
       Student: true,
     },
+    orderBy: [
+      {
+        status: "asc",
+      },
+      {
+        createdAt: "desc",
+      },
+    ],
   });
 
   const currencies = await prisma.currency.findMany();

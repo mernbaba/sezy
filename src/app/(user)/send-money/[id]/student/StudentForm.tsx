@@ -67,6 +67,10 @@ const StudentForm = ({ student }: { student: Student }) => {
       className="space-y-4"
       onSubmit={(e) => {
         e.preventDefault();
+        if (!student?.gender || !student?.dob) {
+          alert("Please fill all the fields");
+          return;
+        }
         router.push(`./beneficiary`);
       }}
     >
@@ -103,7 +107,6 @@ const StudentForm = ({ student }: { student: Student }) => {
               onChange={(e) =>
                 updateStudentFields("middleName", e.target.value)
               }
-              required
             />
           </div>
           <div>
@@ -132,6 +135,7 @@ const StudentForm = ({ student }: { student: Student }) => {
               name="gender"
               defaultValue={student?.gender ?? ""}
               onValueChange={(value) => updateStudentFields("gender", value)}
+              required
             >
               <SelectTrigger>
                 <SelectValue placeholder="Select Gender" />
@@ -246,7 +250,7 @@ const StudentForm = ({ student }: { student: Student }) => {
                   type="file"
                   id="passportFrontSideInput"
                   name="passportFrontSide"
-                  className="hidden border-black border-2"
+                  className="h-0 w-0 inline opacity-0"
                   onChange={async (e) => {
                     if (e.target.files !== null && e.target.files.length > 0) {
                       const { url, error } = await handleFileChange({
@@ -299,7 +303,7 @@ const StudentForm = ({ student }: { student: Student }) => {
                   type="file"
                   id="passportBackSideInput"
                   name="passportBackSide"
-                  className="hidden border-black border-2"
+                  className="h-0 w-0 inline opacity-0"
                   onChange={async (e) => {
                     if (e.target.files !== null && e.target.files.length > 0) {
                       const { url, error } = await handleFileChange({
@@ -352,7 +356,7 @@ const StudentForm = ({ student }: { student: Student }) => {
                   type="file"
                   id="loanDocInput"
                   name="loanDoc"
-                  className="hidden border-black border-2"
+                  className="h-0 w-0 inline opacity-0"
                   onChange={async (e) => {
                     if (e.target.files !== null && e.target.files.length > 0) {
                       const { url, error } = await handleFileChange({
@@ -405,7 +409,7 @@ const StudentForm = ({ student }: { student: Student }) => {
                   type="file"
                   id="admissionDocInput"
                   name="admissionDoc"
-                  className="hidden border-black border-2"
+                  className="h-0 w-0 inline opacity-0"
                   onChange={async (e) => {
                     if (e.target.files !== null && e.target.files.length > 0) {
                       const { url, error } = await handleFileChange({

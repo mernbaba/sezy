@@ -36,6 +36,34 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (remitType == null || remitType == undefined) {
+      alert("Please select a remit type");
+      return;
+    }
+    if (remitType == "Accomodation") {
+      if (!transaction?.document1 || !transaction?.document2) {
+        alert("Please upload the required documents");
+        return;
+      }
+    } else {
+      if (remitType == "University") {
+        if (
+          !transaction?.program ||
+          !transaction?.paymentType ||
+          !transaction?.accountInfo ||
+          !transaction?.bankCodeType
+        ) {
+          alert("Please fill the required fields");
+          return;
+        }
+      } else {
+        if (!transaction?.document1) {
+          alert("Please upload the required documents");
+          return;
+        }
+      }
+    }
+
     updateTransactionFields("status", "Initiated");
     router.push("/transactions");
   };
@@ -498,7 +526,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                     type="file"
                     id="additionalDocumentInput"
                     name="additionalDocument"
-                    className="hidden border-black border-2"
+                    className="h-0 w-0 inline opacity-0"
                     onChange={async (e) => {
                       if (
                         e.target.files !== null &&
@@ -557,7 +585,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                     type="file"
                     id="document1Input"
                     name="document1"
-                    className="hidden border-black border-2"
+                    className="h-0 w-0 inline opacity-0"
                     onChange={async (e) => {
                       if (
                         e.target.files !== null &&
@@ -613,7 +641,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                     type="file"
                     id="document2Input"
                     name="document2"
-                    className="hidden border-black border-2"
+                    className="h-0 w-0 inline opacity-0"
                     onChange={async (e) => {
                       if (
                         e.target.files !== null &&
@@ -674,7 +702,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                     type="file"
                     id="additionalDocumentInput"
                     name="additionalDocument"
-                    className="hidden border-black border-2"
+                    className="h-0 w-0 inline opacity-0"
                     onChange={async (e) => {
                       if (
                         e.target.files !== null &&
@@ -733,7 +761,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                     type="file"
                     id="document1Input"
                     name="document1"
-                    className="hidden border-black border-2"
+                    className="h-0 w-0 inline opacity-0"
                     onChange={async (e) => {
                       if (
                         e.target.files !== null &&
@@ -794,7 +822,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                     type="file"
                     id="additionalDocumentInput"
                     name="additionalDocument"
-                    className="hidden border-black border-2"
+                    className="h-0 w-0 inline opacity-0"
                     onChange={async (e) => {
                       if (
                         e.target.files !== null &&
@@ -853,7 +881,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                     type="file"
                     id="document1Input"
                     name="document1"
-                    className="hidden border-black border-2"
+                    className="h-0 w-0 inline opacity-0"
                     onChange={async (e) => {
                       if (
                         e.target.files !== null &&
@@ -914,7 +942,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                     type="file"
                     id="additionalDocumentInput"
                     name="additionalDocument"
-                    className="hidden border-black border-2"
+                    className="h-0 w-0 inline opacity-0"
                     onChange={async (e) => {
                       if (
                         e.target.files !== null &&
@@ -973,7 +1001,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                     type="file"
                     id="document1Input"
                     name="document1"
-                    className="hidden border-black border-2"
+                    className="h-0 w-0 inline opacity-0"
                     onChange={async (e) => {
                       if (
                         e.target.files !== null &&
@@ -1034,7 +1062,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                     type="file"
                     id="additionalDocumentInput"
                     name="additionalDocument"
-                    className="hidden border-black border-2"
+                    className="h-0 w-0 inline opacity-0"
                     onChange={async (e) => {
                       if (
                         e.target.files !== null &&

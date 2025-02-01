@@ -54,12 +54,7 @@ const Verify = ({ user }: { user: Student }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen space-y-4">
-      <h1 className="text-3xl font-bold">Verify Email</h1>
-      <p>
-        {user ? `Welcome, ${user?.email}` : "You need to verify your email"}
-      </p>
-
+    <div className="flex flex-col items-center gap-4 p-6 md:p-8 h-64">
       {!sent ? (
         <Button onClick={handleOTPSend}>Send OTP</Button>
       ) : (

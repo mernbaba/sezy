@@ -50,13 +50,12 @@ const Page = () => {
 
                     if (error) {
                       console.error("err: ", error);
+                      alert("Failed to create account");
                       return;
                     } else {
                       setCookie("sezy", user, {
                         maxAge: 60 * 60 * 24 * 7,
                       });
-
-                      // router.push("/send-money");
                     }
                   }}
                 >
@@ -107,7 +106,7 @@ const Page = () => {
                         required
                       />
                     </div>
-                    <div className="grid gap-2">
+                    {/* <div className="grid gap-2">
                       <Label htmlFor="referral">Referral</Label>
                       <Input
                         id="referral"
@@ -115,7 +114,7 @@ const Page = () => {
                         type="email"
                         placeholder="Enter referral code"
                       />
-                    </div>
+                    </div> */}
                     <Button type="submit" className="w-full">
                       Sign Up
                     </Button>

@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Student } from "@prisma/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   InputOTP,
   InputOTPGroup,
@@ -22,10 +22,9 @@ const Verify = ({ user }: { user: Student }) => {
 
   const handleOTPSend = async () => {
     try {
-      const tempotp = Math.floor(1000 + Math.random() * 9000).toString();
-      setGenOTP(tempotp);
+      const reponse = await sendOTP(user?.email, genOTP);
 
-      const reponse = await sendOTP(user?.email, tempotp);
+      alert("OTP Sent");
 
       console.log(reponse);
 
@@ -53,35 +52,34 @@ const Verify = ({ user }: { user: Student }) => {
     }
   };
 
-  return (
-    <div className="flex flex-col items-center gap-4 p-6 md:p-8 h-64">
-      {!sent ? (
-        <Button onClick={handleOTPSend}>Send OTP</Button>
-      ) : (
-        <>
-          <InputOTP
-            maxLength={4}
-            pattern={REGEXP_ONLY_DIGITS}
-            value={otp}
-            required
-            onChange={(value) => setOtp(value)}
-          >
-            <InputOTPGroup>
-              <InputOTPSlot index={0} />
-              <InputOTPSlot index={1} />
-            </InputOTPGroup>
-            <InputOTPSeparator />
-            <InputOTPGroup>
-              <InputOTPSlot index={2} />
-              <InputOTPSlot index={3} />
-            </InputOTPGroup>
-          </InputOTP>
+  useEffect(() => {
+    const tempotp = Math.floor(1000 + Math.random() * 9000).toString();
+    setGenOTP(tempotp);
+  }, []);
 
-          <Button type="button" onClick={handleVerifyOTP}>
-            Verify
-          </Button>
-        </>
-      )}
+  return (
+    <div className="flex flex-col items-center justify-center gap-4 p-6 md:p-8 h-64">
+      <Button onClick={handleOTPSend}>
+        {!sent ? "Send OTP" : "Resend OTP"}
+      </Button>
+      <InputOTP
+        maxLength={4}
+        pattern={REGEXP_ONLY_DIGITS}
+        value={otp}
+        required
+        onChange={(value) => setOtp(value)}
+      >
+        <InputOTPGroup>
+          <InputOTPSlot index={0} className="border-black/80" />
+          <InputOTPSlot index={1} className="border-black/80" />
+          <InputOTPSlot index={2} className="border-black/80" />
+          <InputOTPSlot index={3} className="border-black/80" />
+        </InputOTPGroup>
+      </InputOTP>
+
+      <Button type="button" onClick={handleVerifyOTP}>
+        Verify
+      </Button>
     </div>
   );
 };

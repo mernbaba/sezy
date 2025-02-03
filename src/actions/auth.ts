@@ -14,6 +14,10 @@ export async function createUser(payload: {
 }) {
   try {
     const getAgentId = async () => {
+      if (!payload?.referral) {
+        return "0088fb14-7265-465c-bf57-112fe1309bdd";
+      }
+
       const agent = await prisma.agent.findUnique({
         where: {
           email: payload?.referral,

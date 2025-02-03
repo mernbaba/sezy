@@ -57,9 +57,6 @@ const Verify = ({ user }: { user: Student }) => {
 
   return (
     <div className="flex flex-col items-center justify-center gap-4 p-6 md:p-8 h-64">
-      <Button onClick={handleOTPSend}>
-        {!sent ? "Send OTP" : "Resend OTP"}
-      </Button>
       <InputOTP
         maxLength={4}
         pattern={REGEXP_ONLY_DIGITS}
@@ -75,9 +72,14 @@ const Verify = ({ user }: { user: Student }) => {
         </InputOTPGroup>
       </InputOTP>
 
-      <Button type="button" onClick={handleVerifyOTP}>
-        Verify
-      </Button>
+      <div className="flex gap-4">
+        <Button onClick={handleOTPSend} className="w-24">
+          {!sent ? "Send OTP" : "Resend OTP"}
+        </Button>
+        <Button type="button" onClick={handleVerifyOTP} className="w-24">
+          Verify
+        </Button>
+      </div>
     </div>
   );
 };

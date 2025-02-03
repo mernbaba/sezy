@@ -9,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { setCookie } from "cookies-next";
+import { toast } from "sonner";
 
 const Page = () => {
   const router = useRouter();
@@ -38,7 +39,7 @@ const Page = () => {
 
                   if (error) {
                     console.error("err: ", error);
-                    alert("Invalid credentials");
+                    toast.error("Invalid credentials");
                     return;
                   } else {
                     setCookie("sezy", user, {

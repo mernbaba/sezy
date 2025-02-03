@@ -11,6 +11,7 @@ import { setCookie } from "cookies-next";
 import Verify from "../verify-email/verify";
 import { useState } from "react";
 import { Student } from "@prisma/client";
+import { toast } from "sonner";
 
 const Page = () => {
   const [step, setStep] = useState(1);
@@ -50,7 +51,7 @@ const Page = () => {
 
                     if (error) {
                       console.error("err: ", error);
-                      alert("Failed to create account");
+                      toast.error("Failed to create account");
                       return;
                     } else {
                       setCookie("sezy", user, {

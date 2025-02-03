@@ -40,7 +40,7 @@ export async function createUser(payload: {
       },
     });
 
-    revalidatePath("/");
+    await sendOnboardingEmail(payload?.email, payload?.password);
 
     return { user };
   } catch (error) {
@@ -110,5 +110,23 @@ export async function sendOTP(email: string, otp: string) {
   } catch (error) {
     console.error(error);
     return { error: "Failed to send OTP" };
+  }
+}
+
+export async function sendOnboardingEmail(email: string, pass: string) {
+  try {
+    const response = await transport.sendMail({
+      from: process.env.AWS_SES_SMTP_EMAIL,
+      to: email,
+      subject: "Welcome To Sendzy",
+      text: `Your Sendzy account has been created. Your username is : ${email} and password is : ${pass}`,
+    });
+
+    console.log("Onboarding Email Sent", email);
+
+    return response;
+  } catch (error) {
+    console.error(error);
+    return { error: "Failed to send Onboarding Email" };
   }
 }

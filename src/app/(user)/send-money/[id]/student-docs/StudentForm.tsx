@@ -8,6 +8,7 @@ import { updateStudent } from "@/actions/intermediate";
 import { uploadFile } from "@/lib/uploadFile";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { toast } from "sonner";
 
 const StudentForm = ({ student }: { student: Student }) => {
   const router = useRouter();
@@ -21,7 +22,7 @@ const StudentForm = ({ student }: { student: Student }) => {
       });
     } catch (error) {
       console.error(error);
-      alert("Failed to update student");
+      toast.error("Failed to update student");
     }
   };
 
@@ -101,7 +102,7 @@ const StudentForm = ({ student }: { student: Student }) => {
                       });
 
                       if (error) {
-                        alert("Error uploading file");
+                        toast.error("Error uploading file");
                       } else {
                         if (url) {
                           updateStudentFields("passportFrontSide", url);
@@ -154,7 +155,7 @@ const StudentForm = ({ student }: { student: Student }) => {
                       });
 
                       if (error) {
-                        alert("Error uploading file");
+                        toast.error("Error uploading file");
                       } else {
                         if (url) {
                           updateStudentFields("passportBackSide", url);
@@ -207,7 +208,7 @@ const StudentForm = ({ student }: { student: Student }) => {
                       });
 
                       if (error) {
-                        alert("Error uploading file");
+                        toast.error("Error uploading file");
                       } else {
                         if (url) {
                           updateStudentFields("loanDoc", url);
@@ -260,7 +261,7 @@ const StudentForm = ({ student }: { student: Student }) => {
                       });
 
                       if (error) {
-                        alert("Error uploading file");
+                        toast.error("Error uploading file");
                       } else {
                         if (url) {
                           updateStudentFields("admissionDoc", url);

@@ -12,6 +12,7 @@ import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { sendOTP, verifyEmail } from "@/actions/auth";
 import { setCookie } from "cookies-next/client";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const Verify = ({ user }: { user: Student }) => {
   const [otp, setOtp] = useState("");
@@ -23,31 +24,29 @@ const Verify = ({ user }: { user: Student }) => {
     try {
       const reponse = await sendOTP(user?.email, genOTP);
 
-      alert("OTP Sent");
+      toast.success("OTP Sent");
 
       console.log(reponse);
 
       setSent(true);
     } catch (error) {
       console.error(error);
-      alert("Failed to send OTP");
+      toast.error("Failed to send OTP");
     }
   };
 
   const handleVerifyOTP = async () => {
     console.log(otp, genOTP);
     if (otp === genOTP) {
-      console.log("OTP verified");
       const updatedUser = await verifyEmail({ email: user?.email });
       setCookie("sezy", updatedUser?.user, {
         maxAge: 60 * 60 * 24 * 7,
       });
 
-      alert("Email verified");
+      toast.success("Email verified");
       router.push("/send-money");
     } else {
-      console.log("OTP verification failed");
-      alert("OTP verification failed");
+      toast.error("OTP verification failed");
     }
   };
 

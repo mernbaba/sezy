@@ -24,6 +24,7 @@ import {
 import { Currency, Student } from "@prisma/client";
 import { getCookie } from "cookies-next/client";
 import { createTransaction } from "@/actions/transaction";
+import { toast } from "sonner";
 
 const SendMoneyForm = ({ currencies }: { currencies: Currency[] }) => {
   const [amount, setAmount] = useState(0);
@@ -46,12 +47,12 @@ const SendMoneyForm = ({ currencies }: { currencies: Currency[] }) => {
       });
 
       if (transaction) {
-        alert("Transaction initiated");
+        toast.success("Transaction initiated");
         router.push(`/send-money/${transaction?.transactionId}/student`);
       }
     } catch (error) {
       console.log(error);
-      alert("An error happened while creating the transaction");
+      toast.error("An error happened while creating the transaction");
     }
   };
 

@@ -19,6 +19,7 @@ import { Transaction } from "@prisma/client";
 import { uploadFile } from "@/lib/uploadFile";
 import Link from "next/link";
 import { updateTransaction } from "@/actions/intermediate";
+import { toast } from "sonner";
 
 type RemitType =
   | "University"
@@ -37,12 +38,12 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (remitType == null || remitType == undefined) {
-      alert("Please select a remit type");
+      toast.warning("Please select a remit type");
       return;
     }
     if (remitType == "Accomodation") {
       if (!transaction?.document1 || !transaction?.document2) {
-        alert("Please upload the required documents");
+        toast.warning("Please upload the required documents");
         return;
       }
     } else {
@@ -53,12 +54,12 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
           !transaction?.accountInfo ||
           !transaction?.bankCodeType
         ) {
-          alert("Please fill the required fields");
+          toast.warning("Please fill the required fields");
           return;
         }
       } else {
         if (!transaction?.document1) {
-          alert("Please upload the required documents");
+          toast.warning("Please upload the required documents");
           return;
         }
       }
@@ -80,7 +81,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
       });
     } catch (error) {
       console.error(error);
-      alert("Failed to update Beneficiary Details");
+      toast.error("Failed to update Beneficiary Details");
     }
   };
 
@@ -537,7 +538,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                         });
 
                         if (error) {
-                          alert("Error uploading file");
+                          toast.error("Error uploading file");
                         } else {
                           if (url) {
                             updateTransactionFields("additionalDocument", url);
@@ -596,7 +597,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                         });
 
                         if (error) {
-                          alert("Error uploading file");
+                          toast.error("Error uploading file");
                         } else {
                           if (url) {
                             updateTransactionFields("document1", url);
@@ -652,7 +653,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                         });
 
                         if (error) {
-                          alert("Error uploading file");
+                          toast.error("Error uploading file");
                         } else {
                           if (url) {
                             updateTransactionFields("document2", url);
@@ -713,7 +714,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                         });
 
                         if (error) {
-                          alert("Error uploading file");
+                          toast.error("Error uploading file");
                         } else {
                           if (url) {
                             updateTransactionFields("additionalDocument", url);
@@ -772,7 +773,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                         });
 
                         if (error) {
-                          alert("Error uploading file");
+                          toast.error("Error uploading file");
                         } else {
                           if (url) {
                             updateTransactionFields("document1", url);
@@ -833,7 +834,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                         });
 
                         if (error) {
-                          alert("Error uploading file");
+                          toast.error("Error uploading file");
                         } else {
                           if (url) {
                             updateTransactionFields("additionalDocument", url);
@@ -892,7 +893,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                         });
 
                         if (error) {
-                          alert("Error uploading file");
+                          toast.error("Error uploading file");
                         } else {
                           if (url) {
                             updateTransactionFields("document1", url);
@@ -953,7 +954,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                         });
 
                         if (error) {
-                          alert("Error uploading file");
+                          toast.error("Error uploading file");
                         } else {
                           if (url) {
                             updateTransactionFields("additionalDocument", url);
@@ -1012,7 +1013,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                         });
 
                         if (error) {
-                          alert("Error uploading file");
+                          toast.error("Error uploading file");
                         } else {
                           if (url) {
                             updateTransactionFields("document1", url);
@@ -1073,7 +1074,7 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                         });
 
                         if (error) {
-                          alert("Error uploading file");
+                          toast.error("Error uploading file");
                         } else {
                           if (url) {
                             updateTransactionFields("additionalDocument", url);

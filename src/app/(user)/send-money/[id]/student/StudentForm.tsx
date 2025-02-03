@@ -13,6 +13,7 @@ import {
 import { Student } from "@prisma/client";
 import { updateStudent } from "@/actions/intermediate";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const StudentForm = ({ student }: { student: Student }) => {
   const router = useRouter();
@@ -26,7 +27,7 @@ const StudentForm = ({ student }: { student: Student }) => {
       });
     } catch (error) {
       console.error(error);
-      alert("Failed to update student");
+      toast.error("Failed to update student");
     }
   };
 
@@ -36,7 +37,7 @@ const StudentForm = ({ student }: { student: Student }) => {
       onSubmit={(e) => {
         e.preventDefault();
         if (!student?.gender || !student?.dob) {
-          alert("Please fill all the fields");
+          toast.warning("Please fill all the fields");
           return;
         }
         router.push(`./student-docs`);

@@ -30,6 +30,7 @@ type RemitType =
 
 const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
   const router = useRouter();
+  const fileSizeLimit = 2 * 1024 * 1024;
 
   const [remitType, setRemitType] = useState<RemitType>(
     transaction?.remitType as RemitType
@@ -533,8 +534,13 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                         e.target.files !== null &&
                         e.target.files.length > 0
                       ) {
+                        const file = e.target.files[0];
+                        if (file.size > fileSizeLimit) {
+                          toast.error("File size must not exceed 2MB");
+                          return;
+                        }
                         const { url, error } = await handleFileChange({
-                          file: e.target.files[0],
+                          file,
                         });
 
                         if (error) {
@@ -592,8 +598,13 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                         e.target.files !== null &&
                         e.target.files.length > 0
                       ) {
+                        const file = e.target.files[0];
+                        if (file.size > fileSizeLimit) {
+                          toast.error("File size must not exceed 2MB");
+                          return;
+                        }
                         const { url, error } = await handleFileChange({
-                          file: e.target.files[0],
+                          file,
                         });
 
                         if (error) {
@@ -648,8 +659,13 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                         e.target.files !== null &&
                         e.target.files.length > 0
                       ) {
+                        const file = e.target.files[0];
+                        if (file.size > fileSizeLimit) {
+                          toast.error("File size must not exceed 2MB");
+                          return;
+                        }
                         const { url, error } = await handleFileChange({
-                          file: e.target.files[0],
+                          file,
                         });
 
                         if (error) {
@@ -709,8 +725,13 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                         e.target.files !== null &&
                         e.target.files.length > 0
                       ) {
+                        const file = e.target.files[0];
+                        if (file.size > fileSizeLimit) {
+                          toast.error("File size must not exceed 2MB");
+                          return;
+                        }
                         const { url, error } = await handleFileChange({
-                          file: e.target.files[0],
+                          file,
                         });
 
                         if (error) {
@@ -768,8 +789,13 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                         e.target.files !== null &&
                         e.target.files.length > 0
                       ) {
+                        const file = e.target.files[0];
+                        if (file.size > fileSizeLimit) {
+                          toast.error("File size must not exceed 2MB");
+                          return;
+                        }
                         const { url, error } = await handleFileChange({
-                          file: e.target.files[0],
+                          file,
                         });
 
                         if (error) {
@@ -829,8 +855,13 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                         e.target.files !== null &&
                         e.target.files.length > 0
                       ) {
+                        const file = e.target.files[0];
+                        if (file.size > fileSizeLimit) {
+                          toast.error("File size must not exceed 2MB");
+                          return;
+                        }
                         const { url, error } = await handleFileChange({
-                          file: e.target.files[0],
+                          file,
                         });
 
                         if (error) {
@@ -888,8 +919,13 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                         e.target.files !== null &&
                         e.target.files.length > 0
                       ) {
+                        const file = e.target.files[0];
+                        if (file.size > fileSizeLimit) {
+                          toast.error("File size must not exceed 2MB");
+                          return;
+                        }
                         const { url, error } = await handleFileChange({
-                          file: e.target.files[0],
+                          file,
                         });
 
                         if (error) {
@@ -949,8 +985,13 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                         e.target.files !== null &&
                         e.target.files.length > 0
                       ) {
+                        const file = e.target.files[0];
+                        if (file.size > fileSizeLimit) {
+                          toast.error("File size must not exceed 2MB");
+                          return;
+                        }
                         const { url, error } = await handleFileChange({
-                          file: e.target.files[0],
+                          file,
                         });
 
                         if (error) {
@@ -1008,8 +1049,13 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                         e.target.files !== null &&
                         e.target.files.length > 0
                       ) {
+                        const file = e.target.files[0];
+                        if (file.size > fileSizeLimit) {
+                          toast.error("File size must not exceed 2MB");
+                          return;
+                        }
                         const { url, error } = await handleFileChange({
-                          file: e.target.files[0],
+                          file,
                         });
 
                         if (error) {
@@ -1069,8 +1115,13 @@ const BeneficiaryForm = ({ transaction }: { transaction: Transaction }) => {
                         e.target.files !== null &&
                         e.target.files.length > 0
                       ) {
+                        const file = e.target.files[0];
+                        if (file.size > fileSizeLimit) {
+                          toast.error("File size must not exceed 2MB");
+                          return;
+                        }
                         const { url, error } = await handleFileChange({
-                          file: e.target.files[0],
+                          file,
                         });
 
                         if (error) {
